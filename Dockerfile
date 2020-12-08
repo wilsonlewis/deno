@@ -1,6 +1,6 @@
 FROM hayd/alpine-deno
 
-RUN deno install --allow-run --allow-read --allow-write --quiet --force --unstable https://deno.land/x/denon@2.4.5/denon.ts
+RUN deno install --allow-all --quiet --force --unstable https://deno.land/x/denon@2.4.5/denon.ts
 
 USER deno
 
