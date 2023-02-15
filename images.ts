@@ -27,8 +27,17 @@ export function startUploadServer(config: {
       const uploads = await Promise.all(files.map(async (file) => {
         const id = crypto.randomUUID();
         const body = new Uint8Array(await file.arrayBuffer());
-        await bucket.putObject(id, body, { contentType: file.type });
-        return { id, type: 'upload', name: file.name };
+
+        await bucket.putObject(id, body, {
+          acl: 'public-read',
+          contentType: file.type,
+        });
+
+        return {
+          id,
+          type: 'upload',
+          name: file.name,
+        };
       }));
 
       return Response.json({
